@@ -20,15 +20,20 @@ pipeline {
     stage('Test case') {
       steps {
         parallel(
-          "Test case": {
+          "Archiving": {
             archiveArtifacts(onlyIfSuccessful: true, artifacts: 'target/**/*.jar')
             
           },
-          "": {
-            sh 'apt-get update && apt-get install junit'
+          "Install": {
+            sh 'sudo apt-get update && sudo apt-get install junit'
             
           }
         )
+      }
+    }
+    stage('Test cases') {
+      steps {
+        sh 'junit target/surefire-reports/*.xml'
       }
     }
   }
