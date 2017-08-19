@@ -3,17 +3,8 @@ pipeline {
   stages {
     stage('error') {
       steps {
-        parallel(
-          "Start test": {
-            echo 'Start Test'
-            sh 'whoami'
-            
-          },
-          "Maven test": {
-            sh 'mvn test'
-            
-          }
-        )
+        echo 'Start Test'
+        sh 'whoami'
       }
     }
     stage('Maven Build') {
