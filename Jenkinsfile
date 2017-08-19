@@ -27,6 +27,7 @@ junit target/surefire-reports/*.xml'''
           },
           "archiving": {
             sh 'archive "target/**/*.jar"'
+            archiveArtifacts(onlyIfSuccessful: true, artifacts: 'target/**/*.jar')
             
           }
         )
