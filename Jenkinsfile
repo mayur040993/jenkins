@@ -19,18 +19,8 @@ pipeline {
     }
     stage('Test case') {
       steps {
-        parallel(
-          "Test case": {
-            sh '''
-junit target/surefire-reports/*.xml'''
-            
-          },
-          "archiving": {
-            sh 'archive "target/**/*.jar"'
-            archiveArtifacts(onlyIfSuccessful: true, artifacts: 'target/**/*.jar')
-            
-          }
-        )
+        sh 'archive "target/**/*.jar"'
+        archiveArtifacts(onlyIfSuccessful: true, artifacts: 'target/**/*.jar')
       }
     }
   }
