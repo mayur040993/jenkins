@@ -19,7 +19,6 @@ pipeline {
     }
     stage('Test case') {
       steps {
-        sh 'archive "target/**/*.jar"'
         archiveArtifacts(onlyIfSuccessful: true, artifacts: 'target/**/*.jar')
       }
     }
