@@ -8,8 +8,17 @@ pipeline {
   stages {
     stage('Stage msg') {
       steps {
-        echo 'Start Test'
-        sh 'mvn test'
+        parallel(
+          "Stage msg": {
+            echo 'Start Test'
+            sh 'mvn test'
+            
+          },
+          "Maven Test": {
+            echo 'MAVEN TEST'
+            
+          }
+        )
       }
     }
     stage('build') {
@@ -17,9 +26,18 @@ pipeline {
         sh 'mvn package'
       }
     }
-    stage('Test case') {
+    stage('Archiving') {
       steps {
-        archiveArtifacts(onlyIfSuccessful: true, artifacts: 'target/**/*.jar')
+        parallel(
+          "Archiving": {
+            archiveArtifacts(onlyIfSuccessful: true, artifacts: 'target/**/*.jar')
+            
+          },
+          "Archiving Jar": {
+            echo 'archiving jar'
+            
+          }
+        )
       }
     }
     stage('Test cases') {
