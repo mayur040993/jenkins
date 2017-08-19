@@ -9,13 +9,12 @@ pipeline {
     stage('Stage msg') {
       steps {
         echo 'Start Test'
-        sh 'whoami'
         sh 'mvn test'
       }
     }
     stage('build') {
       steps {
-        sh 'mvn test'
+        sh 'mvn build'
       }
     }
   }
