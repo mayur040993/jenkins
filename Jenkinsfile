@@ -33,7 +33,7 @@ pipeline {
     }
     stage('Test cases') {
       steps {
-        sh 'junit target/surefire-reports/*.xml'
+        junit ' junit target/surefire-reports/*.xml'
       }
     }
   }
