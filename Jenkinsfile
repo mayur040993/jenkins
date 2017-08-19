@@ -19,7 +19,16 @@ pipeline {
     }
     stage('Test case') {
       steps {
-        archiveArtifacts(onlyIfSuccessful: true, artifacts: 'target/**/*.jar')
+        parallel(
+          "Test case": {
+            archiveArtifacts(onlyIfSuccessful: true, artifacts: 'target/**/*.jar')
+            
+          },
+          "": {
+            sh 'apt-get update && apt-get install junit'
+            
+          }
+        )
       }
     }
   }
