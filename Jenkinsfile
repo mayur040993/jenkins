@@ -11,6 +11,7 @@ pipeline {
         parallel(
           "Start test": {
             echo 'Start Test'
+            sh 'whoami'
             
           },
           "Maven test": {
