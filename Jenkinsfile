@@ -14,7 +14,22 @@ pipeline {
     }
     stage('build') {
       steps {
-        sh 'mvn package'
+        parallel(
+          "build": {
+            sh 'mvn package'
+            
+          },
+          "archive": {
+            sh 'archive "target/**/*.jar"'
+            
+          }
+        )
+      }
+    }
+    stage('Test case') {
+      steps {
+        sh '''
+junit target/surefire-reports/*.xml'''
       }
     }
   }
