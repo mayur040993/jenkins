@@ -1,12 +1,12 @@
 pipeline {
   agent {
     docker {
-      image 'maven:3.5.0-jdk-8'
+      image 'maven:3.5-jdk-8'
     }
     
   }
   stages {
-    stage('') {
+    stage('error') {
       steps {
         parallel(
           "Start test": {
