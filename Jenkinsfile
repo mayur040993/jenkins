@@ -1,10 +1,5 @@
 pipeline {
-  agent {
-    docker {
-      image 'maven:3.5-jdk-8'
-    }
-    
-  }
+  agent none
   stages {
     stage('error') {
       steps {
