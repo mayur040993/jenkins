@@ -45,10 +45,5 @@ pipeline {
         junit 'target/surefire-reports/*.xml'
       }
     }
-    stage('') {
-      steps {
-        tool(name: 'maven', type: 'apache-maven-3.0.1')
-      }
-    }
   }
 }
