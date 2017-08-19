@@ -14,22 +14,22 @@ pipeline {
     }
     stage('build') {
       steps {
-        parallel(
-          "build": {
-            sh 'mvn package'
-            
-          },
-          "archive": {
-            sh 'archive "target/**/*.jar"'
-            
-          }
-        )
+        sh 'mvn package'
       }
     }
     stage('Test case') {
       steps {
-        sh '''
+        parallel(
+          "Test case": {
+            sh '''
 junit target/surefire-reports/*.xml'''
+            
+          },
+          "archiving": {
+            sh 'archive "target/**/*.jar"'
+            
+          }
+        )
       }
     }
   }
